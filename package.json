@@ -1,5 +1,5 @@
 {
-  "name": "ms-sample-web-app",
+  "name": "ms-sample-admin-web-app",
   "private": true,
   "sideEffects": false,
   "scripts": {
