@@ -3,6 +3,12 @@ import invariant from "tiny-invariant";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
+if (process.env.NODE_ENV === "production" && process.env.SESSION_TYPE !== "secure") {
+  console.error("---------------------------------------------------");
+  console.error("Your ENV IS PRODUCTION AND SESSION TYPE is not 'secure'");
+  console.error("---------------------------------------------------");
+}
+
 export const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "__session",
@@ -10,7 +16,7 @@ export const sessionStorage = createCookieSessionStorage({
     path: "/",
     sameSite: "lax",
     secrets: [process.env.SESSION_SECRET],
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.SESSION_TYPE === "secure"
   },
 });
 
